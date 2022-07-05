@@ -24,10 +24,12 @@ import {
   List,
   ListItem,
 } from '@patternfly/react-core';
-import { TableComponent } from '@app/Repositories/TableComponent';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { getVersion } from '@app/utils/APIService';
 import { Context } from "src/app/store/store";
+import { RepositoriesTable } from '@app/Repositories/RepositoriesTable';
+import { TableComponent } from '@app/Repositories/TableComponent';
+
 
 export const Dashboard = () => {
   const [isExpanded, setIsExpanded] = React.useState(false);

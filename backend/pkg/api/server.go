@@ -74,6 +74,7 @@ func (s *Server) registerHandlers() {
 	s.router.HandleFunc("/api/jira/e2e-known/get", s.getE2eKnownIssues).Methods("GET")
 	s.router.HandleFunc("/api/quality/workflows/get", s.listWorkflowsHandler).Methods("GET")
 	s.router.HandleFunc("/api/quality/repositories/list", s.listRepositoriesHandler).Methods("GET")
+	s.router.HandleFunc("/api/quality/repositories/get/{git_org}/{repo_name}", s.getRepositoryHandler).Methods("GET")
 	s.router.HandleFunc("/api/quality/repositories/create", s.repositoriesCreateHandler).Methods("POST")
 	s.router.HandleFunc("/api/quality/repositories/delete", s.deleteRepositoryHandler).Methods("DELETE")
 	s.router.PathPrefix("/api/swagger/").Handler(httpSwagger.Handler(
