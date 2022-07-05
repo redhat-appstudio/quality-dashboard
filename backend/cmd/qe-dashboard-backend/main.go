@@ -2,21 +2,18 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/andygrunwald/go-jira"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
 	"github.com/flacatus/qe-dashboard-backend/pkg/api"
-	client "github.com/flacatus/qe-dashboard-backend/pkg/api/apis/jira"
 	"github.com/flacatus/qe-dashboard-backend/pkg/signals"
 	"github.com/flacatus/qe-dashboard-backend/pkg/storage"
 	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent"
@@ -101,31 +98,6 @@ func main() {
 	var srvCfg api.Config
 	if err := viper.Unmarshal(&srvCfg); err != nil {
 		logger.Panic("config unmarshal failed", zap.Error(err))
-	}
-
-	factory := client.NewTotClientFactory()
-	jiraClient, err := factory.NewJiraClient()
-	if err != nil {
-		log.Fatal(err)
-	}
-	var issues []jira.Issue
-
-	// append the jira issues to []jira.Issue
-	appendFunc := func(i jira.Issue) (err error) {
-		issues = append(issues, i)
-		return err
-	}
-
-	// In this example, we'll search for all the issues with the provided JQL filter and Print the Story Points
-	err = jiraClient.Issue.SearchPages("labels in (appstudio-e2e-tests-known-issues) AND status not in (resolved, closed)", nil, appendFunc)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, issue := range issues {
-		logger.Sugar().Infof("Jira creator: %s", issue.Fields.Creator.DisplayName)
-		logger.Sugar().Infof("Jira Priority: %s", issue.Fields.Priority.Name)
-		logger.Sugar().Infof("Jira Key: %s", issue.Key)
 	}
 
 	// log version and port

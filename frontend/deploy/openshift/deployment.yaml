@@ -44,4 +44,4 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           image: >-
-            quay.io/redhat-appstudio/quality-dashboard-frontend:latest
+            quay.io/flacatus/frontend:next

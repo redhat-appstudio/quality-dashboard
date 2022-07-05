@@ -3,8 +3,10 @@ package factory
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/andygrunwald/go-jira"
+	"github.com/flacatus/qe-dashboard-backend/pkg/utils"
 )
 
 type ClientFactory interface {
@@ -19,7 +21,12 @@ type clientFactory struct {
 }
 
 func (t *clientFactory) NewJiraClient() (*jira.Client, error) {
-	transport := TokenAuthTransport{Token: "aaa+ss"}
+	token := ""
+	if utils.CheckIfEnvironmentExists("JIRA_TOKEN") {
+		token = os.Getenv("JIRA_TOKEN")
+
+	}
+	transport := TokenAuthTransport{Token: token}
 	return jira.NewClient(transport.Client(), "https://issues.redhat.com")
 }
 

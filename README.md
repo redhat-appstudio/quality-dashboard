@@ -19,7 +19,7 @@ Script creates namespace `appstudio-qe` and deploy OpenShift resources for [back
 
 ```
 # Run `install.sh` from hack folder to deploy the dashboard
-$ /bin/bash hack/install.sh --storage-user <username> --storage-password <password>  --github-token <token>
+$ /bin/bash hack/install.sh --storage-user <username> --storage-password <password> --github-token <token> --jira-token <token>
 ```
 
 When running the install script, you need to specify these parameters:
@@ -27,5 +27,6 @@ When running the install script, you need to specify these parameters:
 | Parameter Name | Description | Required | Example |
 | -- | -- | -- | -- |
 | `github-token` | Github token to read repositories | yes | --github-token ghp_xxxxx |
+| `jira-token` | Github token to read repositories | yes | --github-token ghp_xxxxx |
 | `storage-user` | Database user name | yes | --storage-user admin |
 | `storage-password` | Database user password | yes | --storage-password adminPassword |

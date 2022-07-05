@@ -1,21 +1,26 @@
 package api
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/andygrunwald/go-jira"
+	jira "github.com/andygrunwald/go-jira"
 	client "github.com/flacatus/qe-dashboard-backend/pkg/api/apis/jira"
 )
 
-// Version godoc
-// @Summary Version
-// @Description returns quality backend version
+const (
+	KNOWN_E2E_ISSUE_LABEL = "appstudio-e2e-tests-known-issues"
+)
+
+// Jira godoc
+// @Summary Jira
+// @Description returns a list of jira issues which contain the label appstudio-e2e-tests-known-issues
 // @Tags Version API
 // @Produce json
-// @Router /api/version [get]
+// @Router /api/jira/e2e-known/get [get]
 // @Success 200 {object} api.MapResponse
-func (s *Server) jiraIssueKnown(w http.ResponseWriter, r *http.Request) {
+func (s *Server) getE2eKnownIssues(w http.ResponseWriter, r *http.Request) {
 	factory := client.NewTotClientFactory()
 	jiraClient, err := factory.NewJiraClient()
 	if err != nil {
@@ -30,7 +35,7 @@ func (s *Server) jiraIssueKnown(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// In this example, we'll search for all the issues with the provided JQL filter and Print the Story Points
-	err = jiraClient.Issue.SearchPages("labels in (appstudio-e2e-tests-known-issues) AND status not in (resolved, closed)", nil, appendFunc)
+	err = jiraClient.Issue.SearchPages(fmt.Sprintf("labels in (%s) AND status not in (resolved, closed)", KNOWN_E2E_ISSUE_LABEL), nil, appendFunc)
 	if err != nil {
 		log.Fatal(err)
 	}

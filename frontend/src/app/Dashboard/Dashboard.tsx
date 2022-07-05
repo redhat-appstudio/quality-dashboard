@@ -23,7 +23,6 @@ import {
   DrawerCloseButton,
   List,
   ListItem,
-  Spinner,
 } from '@patternfly/react-core';
 import { TableComponent } from '@app/Repositories/TableComponent';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
@@ -39,7 +38,7 @@ export const Dashboard = () => {
   };
 
   function getJiras(){
-    fetch('http://localhost:9898/api/jira/known/get')
+    fetch('http://localhost:9898/api/jira/e2e-known/get')
     .then(response => response.json())
     .then(async json => {
       setJiras(json)
@@ -67,10 +66,10 @@ export const Dashboard = () => {
 
   const JiraIssuesList = () => (
     <List isPlain isBordered>
-      { computeJiraIssueCount(jiraType) == 0 && <div style={{textAlign: "center", margin: "10px auto"}}><i>No issues here</i></div>}
+      { computeJiraIssueCount(jiraType) == 0 && <div style={{textAlign: "center", margin: "10px auto", minHeight:"500px"}}><i>No issues here</i></div>}
       {jiras.filter(j => j["fields"]["priority"]["name"] == jiraType).map(j => (
         <ListItem style={{marginTop: "5px"}}>
-          <strong style={{textDecoration: "underline", color: "blue"}}>{j["key"]}</strong>
+          <strong style={{textDecoration: "underline", color: "blue"}}><a href={`https://issues.redhat.com/browse/${j["key"]}`}>{j["key"]}</a></strong>
           : &nbsp;
           {j["fields"]["summary"]}
         </ListItem>
@@ -79,7 +78,7 @@ export const Dashboard = () => {
   )
 
   const panelContent = (
-    <DrawerPanelContent maxSize="30%">
+    <DrawerPanelContent isResizable defaultSize={'15vw'} minSize={'35vw'}>
       <DrawerHead>
         <DrawerActions>
           <DrawerCloseButton onClick={onCloseClick} />
@@ -164,7 +163,7 @@ export const Dashboard = () => {
               <Card isRounded isCompact style={{width: "65%"}}>
                 <CardTitle>
                   <Title headingLevel="h2" size="xl">
-                    Red Hat App Studio known bugs
+                    Red Hat AppStudio E2E jira issues
                   </Title>
                 </CardTitle>
                 <Grid md={4} style={{margin: "auto 5px"}}>
