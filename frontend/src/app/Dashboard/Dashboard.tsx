@@ -218,6 +218,5 @@ export const Dashboard = () => {
         </DrawerContent>
       </Drawer>
     </React.Fragment>
-
   );
 }

@@ -21,6 +21,8 @@ import (
 
 	// Register postgres driver.
 	_ "github.com/lib/pq"
+
+	jiraFactory "github.com/flacatus/qe-dashboard-backend/pkg/api/apis/jira"
 )
 
 // @title Quality Backend API
@@ -51,6 +53,7 @@ type Server struct {
 	logger     *zap.Logger
 	config     *Config
 	githubAPI  *github.API
+	JiraApi    jiraFactory.Jira
 	codecovAPI *codecov.API
 	handler    http.Handler
 }
@@ -58,12 +61,15 @@ type Server struct {
 func NewServer(config *Config, logger *zap.Logger) (*Server, error) {
 	gh := github.NewGitubClient()
 	codecov := codecov.NewCodeCoverageClient()
+	factory := jiraFactory.NewJiraConfig()
+
 	srv := &Server{
 		router:     mux.NewRouter(),
 		logger:     logger,
 		config:     config,
 		githubAPI:  gh,
 		codecovAPI: codecov,
+		JiraApi:    factory,
 	}
 
 	return srv, nil

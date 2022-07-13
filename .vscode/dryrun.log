@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/flacatusu/WORKSPACE/appstudio-qe/quality-dashboard'
+make: Leaving directory '/home/flacatusu/WORKSPACE/appstudio-qe/quality-dashboard'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

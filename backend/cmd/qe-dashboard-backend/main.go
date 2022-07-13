@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 	"strconv"
 	"strings"
@@ -35,14 +34,6 @@ type keyCacher struct {
 	storage.Storage
 
 	now func() time.Time
-}
-
-type TokenAuthTransport struct {
-	Token string
-
-	// Transport is the underlying HTTP transport to use when making requests.
-	// It will default to http.DefaultTransport if nil.
-	Transport http.RoundTripper
 }
 
 func main() {

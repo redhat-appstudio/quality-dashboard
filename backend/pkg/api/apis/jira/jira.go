@@ -1,4 +1,4 @@
-package factory
+package jira
 
 import (
 	"fmt"
@@ -9,25 +9,25 @@ import (
 	"github.com/flacatus/qe-dashboard-backend/pkg/utils"
 )
 
-type ClientFactory interface {
-	NewJiraClient() (*jira.Client, error)
+type Jira interface {
+	GetIssueByJQLQuery(JQLQuery string) []jira.Issue
 }
 
-func NewTotClientFactory() ClientFactory {
-	return &clientFactory{}
-}
-
-type clientFactory struct {
-}
-
-func (t *clientFactory) NewJiraClient() (*jira.Client, error) {
+func NewJiraConfig() Jira {
 	token := ""
 	if utils.CheckIfEnvironmentExists("JIRA_TOKEN") {
 		token = os.Getenv("JIRA_TOKEN")
-
 	}
 	transport := TokenAuthTransport{Token: token}
-	return jira.NewClient(transport.Client(), "https://issues.redhat.com")
+	client, _ := jira.NewClient(transport.Client(), "https://issues.redhat.com")
+
+	return &clientFactory{
+		Client: client,
+	}
+}
+
+type clientFactory struct {
+	Client *jira.Client
 }
 
 type TokenAuthTransport struct {
