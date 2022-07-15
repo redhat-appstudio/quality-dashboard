@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <testsuites tests="107" disabled="15" errors="0" failures="1" time="1856.429966931">
+      <testsuite name="Red Hat App Studio E2E tests" package="/go/src/github.com/redhat-appstudio/infra-deployments" tests="107" disabled="0" skipped="15" errors="0" failures="1" time="1856.429966931" timestamp="2022-07-14T00:56:05">
+          <properties>
+              <property name="SuiteSucceeded" value="false"></property>
+              <property name="SuiteHasProgrammaticFocus" value="false"></property>
+              <property name="SpecialSuiteFailureReason" value=""></property>
+              <property name="SuiteLabels" value="[]"></property>
+              <property name="RandomSeed" value="1657760136"></property>
+              <property name="RandomizeAllSpecs" value="false"></property>
+              <property name="LabelFilter" value=""></property>
+              <property name="FocusStrings" value=""></property>
+              <property name="SkipStrings" value=""></property>
+              <property name="FocusFiles" value=""></property>
+              <property name="SkipFiles" value=""></property>
+              <property name="FailOnPending" value="false"></property>
+              <property name="FailFast" value="false"></property>
+              <property name="FlakeAttempts" value="0"></property>
+              <property name="EmitSpecProgress" value="false"></property>
+              <property name="DryRun" value="false"></property>
+              <property name="ParallelTotal" value="1"></property>
+              <property name="OutputInterceptorMode" value=""></property>
+          </properties>
+          <testcase name="[SynchronizedBeforeSuite]" classname="Red Hat App Studio E2E tests" status="passed" time="2.151e-05"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] infrastructure is running verify the chains controller is running" classname="Red Hat App Studio E2E tests" status="passed" time="0.029666409"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] infrastructure is running verify the correct secrets have been created" classname="Red Hat App Studio E2E tests" status="passed" time="0.031219397"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] infrastructure is running verify the correct roles are created" classname="Red Hat App Studio E2E tests" status="passed" time="0.027503711"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] infrastructure is running verify the correct rolebindings are created" classname="Red Hat App Studio E2E tests" status="passed" time="0.028379708"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] infrastructure is running verify the correct service account is created" classname="Red Hat App Studio E2E tests" status="passed" time="0.013781391"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task creates signature and attestation" classname="Red Hat App Studio E2E tests" status="passed" time="163.197528692"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task verify image attestation" classname="Red Hat App Studio E2E tests" status="passed" time="30.122435496"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task cosign verify" classname="Red Hat App Studio E2E tests" status="passed" time="14.104398787"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task verify-enterprise-contract task succeeds when policy is met" classname="Red Hat App Studio E2E tests" status="passed" time="15.225428549"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task verify-enterprise-contract task does not pass when tests are not satisfied on non-strict mode" classname="Red Hat App Studio E2E tests" status="passed" time="15.1512593"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task verify-enterprise-contract task fails when tests are not satisfied on strict mode" classname="Red Hat App Studio E2E tests" status="passed" time="17.135465314"></testcase>
+          <testcase name="[It] [chains-suite Tekton Chains E2E tests] test creating and signing an image and task verify-enterprise-contract task fails when unexpected signature is used" classname="Red Hat App Studio E2E tests" status="passed" time="9.155402161"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Creation of the &#39;Happy path&#39; resources Create an ApplicationSnapshot." classname="Red Hat App Studio E2E tests" status="passed" time="2.190948633"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Creation of the &#39;Happy path&#39; resources Create Release Strategy" classname="Red Hat App Studio E2E tests" status="passed" time="0.040040069"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Creation of the &#39;Happy path&#39; resources Create ReleaseLink in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.048390565"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Creation of the &#39;Happy path&#39; resources Create ReleaseLink in managed namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.019288677"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Creation of the &#39;Happy path&#39; resources Create a Release" classname="Red Hat App Studio E2E tests" status="passed" time="0.042296348"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Post-release verification A PipelineRun should have been created in the managed namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.014012155"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Post-release verification The PipelineRun should exist and succeed" classname="Red Hat App Studio E2E tests" status="passed" time="7.188677019"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Post-release verification The Release should have succeeded" classname="Red Hat App Studio E2E tests" status="passed" time="0.014446482"></testcase>
+          <testcase name="[It] [release-suite test-release-service-happy-path] Post-release verification The Release should reference the release PipelineRun" classname="Red Hat App Studio E2E tests" status="passed" time="0.094824996"></testcase>
+          <testcase name="[It] [has-suite devfile source] Create Red Hat AppStudio Application" classname="Red Hat App Studio E2E tests" status="passed" time="0.113067664"></testcase>
+          <testcase name="[It] [has-suite devfile source] Check Red Hat AppStudio Application health" classname="Red Hat App Studio E2E tests" status="passed" time="1.3135976120000001"></testcase>
+          <testcase name="[It] [has-suite devfile source] Check if &#39;git-clone&#39; cluster tasks exists" classname="Red Hat App Studio E2E tests" status="passed" time="0.052376645"></testcase>
+          <testcase name="[It] [has-suite devfile source] Create Red Hat AppStudio ComponentDetectionQuery for Component repository" classname="Red Hat App Studio E2E tests" status="passed" time="0.048735541"></testcase>
+          <testcase name="[It] [has-suite devfile source] Check Red Hat AppStudio ComponentDetectionQuery status" classname="Red Hat App Studio E2E tests" status="passed" time="2.048574313"></testcase>
+          <testcase name="[It] [has-suite devfile source] Create Red Hat AppStudio Quarkus component" classname="Red Hat App Studio E2E tests" status="passed" time="0.029164309"></testcase>
+          <testcase name="[It] [has-suite devfile source] Check a Component gets deleted when its application is deleted" classname="Red Hat App Studio E2E tests" status="passed" time="10.123457355"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing matching ReleaseLink All required resources are created successfully Create an ApplicationSnapshot" classname="Red Hat App Studio E2E tests" status="passed" time="2.188564627"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing matching ReleaseLink All required resources are created successfully Create ReleaseLink in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.019325546"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing matching ReleaseLink All required resources are created successfully Create a Release in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.028969015"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing matching ReleaseLink A ReleaseLink has to have a matching one in a managed workspace The Release has failed with the REASON field set to ReleaseValidationError" classname="Red Hat App Studio E2E tests" status="passed" time="0.017883151"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing matching ReleaseLink A ReleaseLink has to have a matching one in a managed workspace Condition message describes an error finding a matching ReleaseLink" classname="Red Hat App Studio E2E tests" status="passed" time="0.120930787"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline All required resources are created successfully Create an ApplicationSnapshot" classname="Red Hat App Studio E2E tests" status="passed" time="2.173156009"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline All required resources are created successfully Create ReleaseLink in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.021747899"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline All required resources are created successfully Create ReleaseLink in managed namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.021087218"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline All required resources are created successfully Create ReleaseStrategy in managed namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.019948357"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline All required resources are created successfully Create a Release in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.018188707"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline A Release must relate to an existing pipeline in the managed workspace The Release has failed with the REASON field set to ReleasePipelineFailed" classname="Red Hat App Studio E2E tests" status="passed" time="0.253296833"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing release pipeline A Release must relate to an existing pipeline in the managed workspace Condition message describes an error retrieving pipeline" classname="Red Hat App Studio E2E tests" status="passed" time="0.080158407"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy All required resources are created successfully Create an ApplicationSnapshot" classname="Red Hat App Studio E2E tests" status="passed" time="2.159210046"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy All required resources are created successfully Create ReleaseLink in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.01898558"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy All required resources are created successfully Create ReleaseLink in managed namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.020984766"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy All required resources are created successfully Create a Release in dev namespace" classname="Red Hat App Studio E2E tests" status="passed" time="0.017910492"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy A Release must relate to an existing ReleaseStrategy in the managed workspace The Release has failed with the REASON field set to ReleaseValidationError" classname="Red Hat App Studio E2E tests" status="passed" time="0.015050992"></testcase>
+          <testcase name="[It] [release-suite test-release-service-failures] Failure - Missing ReleaseStrategy A Release must relate to an existing ReleaseStrategy in the managed workspace Condition message describes an error retrieving ReleaseStrategy" classname="Red Hat App Studio E2E tests" status="passed" time="0.080519933"></testcase>
+          <testcase name="[It] [integration-service-suite Integration Service E2E tests] when component with container image source is created should not trigger a PipelineRun" classname="Red Hat App Studio E2E tests" status="passed" time="10.079188071"></testcase>
+          <testcase name="[It] [integration-service-suite Integration Service E2E tests] when component with git source is created triggers a PipelineRun [slow]" classname="Red Hat App Studio E2E tests" status="passed" time="4.123038669"></testcase>
+          <testcase name="[It] [integration-service-suite Integration Service E2E tests] when component with git source is created when the PipelineRun has started should eventually finish successfully [slow, integration-service]" classname="Red Hat App Studio E2E tests" status="passed" time="150.684203178"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Create Red Hat AppStudio Application" classname="Red Hat App Studio E2E tests" status="passed" time="1.113893517"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Check Red Hat AppStudio Application health" classname="Red Hat App Studio E2E tests" status="passed" time="1.435187135"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Check if &#39;git-clone&#39; cluster tasks exists" classname="Red Hat App Studio E2E tests" status="passed" time="0.076892127"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Create Red Hat AppStudio ComponentDetectionQuery for Component repository" classname="Red Hat App Studio E2E tests" status="passed" time="0.016568478"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Check Red Hat AppStudio ComponentDetectionQuery status" classname="Red Hat App Studio E2E tests" status="passed" time="2.046478474"></testcase>
+          <testcase name="[It] [has-suite private devfile source] Create Red Hat AppStudio Quarkus component" classname="Red Hat App Studio E2E tests" status="passed" time="0.339658337"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component application is created" classname="Red Hat App Studio E2E tests" status="passed" time="0.046913577"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component application is healthy" classname="Red Hat App Studio E2E tests" status="passed" time="1.155641615"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component create component nodejs-component from git source https://github.com/redhat-appstudio-qe/simple-nodejs-app and devfile https://raw.githubusercontent.com/redhat-appstudio-qe/simple-nodejs-app/main/devfiles/devfile.yaml" classname="Red Hat App Studio E2E tests" status="passed" time="0.019962398"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component wait component nodejs-component pipeline to be finished" classname="Red Hat App Studio E2E tests" status="passed" time="80.052878591"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component deploy component nodejs-component using gitops" classname="Red Hat App Studio E2E tests" status="passed" time="30.137970199"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-466: create an application with nodejs component check component nodejs-component health" classname="Red Hat App Studio E2E tests" status="passed" time="0.063788248"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component application is created" classname="Red Hat App Studio E2E tests" status="passed" time="0.028797601"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component application is healthy" classname="Red Hat App Studio E2E tests" status="passed" time="1.402307549"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component create component dotnet-component from git source https://github.com/redhat-appstudio-qe/devfile-sample-dotnet60-basic" classname="Red Hat App Studio E2E tests" status="passed" time="0.027183663"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component wait component dotnet-component pipeline to be finished" classname="Red Hat App Studio E2E tests" status="passed" time="180.052224378"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component deploy component dotnet-component using gitops" classname="Red Hat App Studio E2E tests" status="passed" time="30.092292153"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-476: create an application with DotNet component check component dotnet-component health" classname="Red Hat App Studio E2E tests" status="passed" time="0.07272872"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components application is created" classname="Red Hat App Studio E2E tests" status="passed" time="0.029410759"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components application is healthy" classname="Red Hat App Studio E2E tests" status="passed" time="1.413654438"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components create component component-python from git source https://github.com/redhat-appstudio-qe/devfile-sample-python-basic" classname="Red Hat App Studio E2E tests" status="passed" time="0.02945741"></testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components wait component component-python pipeline to be finished" classname="Red Hat App Studio E2E tests" status="failed" time="900.136963662">
+              <failure message="Failed component pipeline &lt;nil&gt;&#xA;Expected success, but got an error:&#xA;    &lt;*errors.errorString | 0xc0003d86a0&gt;: {&#xA;        s: &#34;timed out waiting for the condition&#34;,&#xA;    }&#xA;    timed out waiting for the condition" type="failed">/go/src/github.com/redhat-appstudio/infra-deployments/tmp/e2e-tests/tests/e2e-demos/e2e-demo.go:133&#xA;github.com/redhat-appstudio/e2e-tests/tests/e2e-demos.glob..func1.3.6()&#xA;&#x9;/go/src/github.com/redhat-appstudio/infra-deployments/tmp/e2e-tests/tests/e2e-demos/e2e-demo.go:133 +0x16e</failure>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components deploy component component-python using gitops" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components check component component-python health" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components create component component-golang from git source https://github.com/redhat-appstudio-qe/devfile-sample-go-basic" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components wait component component-golang pipeline to be finished" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components deploy component component-golang using gitops" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-478: create an application with multiple components check component component-golang health" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image application is created" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image application is healthy" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image create component quay-public-component from container source" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image wait component quay-public-component pipeline to be finished" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image deploy component quay-public-component using gitops" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [e2e-demos-suite] when RHDP-467: create an application with a component from quay.io image check component quay-public-component health" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because an earlier spec in an ordered container failed"></skipped>
+          </testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with container image source is created should not trigger a PipelineRun" classname="Red Hat App Studio E2E tests" status="passed" time="10.088383418"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created triggers a PipelineRun [slow, build-templates-e2e]" classname="Red Hat App Studio E2E tests" status="passed" time="4.125989887"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created should reference the custom pipeline bundle in a PipelineRun [slow, build-templates-e2e]" classname="Red Hat App Studio E2E tests" status="skipped" time="0.000114722">
+              <skipped message="skipped - skipping the specs - custom pipeline bundle is not defined"></skipped>
+          </testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created should reference the default pipeline bundle in a PipelineRun [slow]" classname="Red Hat App Studio E2E tests" status="passed" time="0.01506439"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the PipelineRun has started should eventually finish successfully [slow, build-templates-e2e]" classname="Red Hat App Studio E2E tests" status="passed" time="60.212342127"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the PipelineRun is finished eventually leads to a creation of a component webhook (event listener) [slow, webhook]" classname="Red Hat App Studio E2E tests" status="passed" time="0.017672186"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the container image is created and pushed to container registry contains non-empty sbom files [slow, build-templates-e2e, sbom]" classname="Red Hat App Studio E2E tests" status="passed" time="0.909964715"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the component event listener is created should be eventually ready to receive events from Github [slow, webhook]" classname="Red Hat App Studio E2E tests" status="passed" time="0.056613461"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the component webhook is configured on Github repository for &#39;push&#39; events and a change is pushed eventually leads to triggering another PipelineRun [slow, webhook]" classname="Red Hat App Studio E2E tests" status="passed" time="6.147907811"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the component webhook is configured on Github repository for &#39;push&#39; events and a change is pushed PipelineRun should eventually finish [slow, webhook]" classname="Red Hat App Studio E2E tests" status="passed" time="75.586628907"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when component with git source is created when the component webhook is configured on Github repository for &#39;push&#39; events and a change is pushed ContainerImage field should be updated with the SHA of the commit that was pushed to the Component source repo [slow, webhook]" classname="Red Hat App Studio E2E tests" status="passed" time="0.159372487"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when a configmap with &#39;dummy&#39; custom pipeline bundle is created in the testing namespace should be referenced in another PipelineRun" classname="Red Hat App Studio E2E tests" status="passed" time="5.134276397"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when a secret with dummy quay.io credentials is created in the testing namespace should override the shared secret [build-secret, slow]" classname="Red Hat App Studio E2E tests" status="skipped" time="0.013876161">
+              <skipped message="skipped - a registry auth secret is already created in testing namespace - skipping...."></skipped>
+          </testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when a secret with dummy quay.io credentials is created in the testing namespace should not be possible to push to quay.io repo (PipelineRun should fail) [build-secret, slow]" classname="Red Hat App Studio E2E tests" status="skipped" time="0">
+              <skipped message="skipped - Spec skipped because Skip() was called in BeforeAll"></skipped>
+          </testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when creating a component with a specific container image URL should fail for ContainerImage field set to a protected repository (without an image tag) [image repository protection]" classname="Red Hat App Studio E2E tests" status="passed" time="1.083072991"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when creating a component with a specific container image URL should fail for ContainerImage field set to a protected repository followed by a random tag [image repository protection]" classname="Red Hat App Studio E2E tests" status="passed" time="0.319046648"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when creating a component with a specific container image URL should succeed for ContainerImage field set to a protected repository followed by a namespace prefix + dash + string [image repository protection]" classname="Red Hat App Studio E2E tests" status="passed" time="0.934043304"></testcase>
+          <testcase name="[It] [build-service-suite Build Service E2E tests] when creating a component with a specific container image URL should succeed for ContainerImage field set to a custom (unprotected) repository without a tag being specified [image repository protection]" classname="Red Hat App Studio E2E tests" status="passed" time="1.9224752139999999"></testcase>
+          <testcase name="[It] [cluster-registration-suite Cluster Registration E2E tests] infrastructure is running verify the cluster-registration-installer-controller-manager is running" classname="Red Hat App Studio E2E tests" status="passed" time="0.028807481"></testcase>
+          <testcase name="[It] [cluster-registration-suite Cluster Registration E2E tests] infrastructure is running verify the correct roles are created" classname="Red Hat App Studio E2E tests" status="passed" time="0.014355359"></testcase>
+          <testcase name="[It] [cluster-registration-suite Cluster Registration E2E tests] infrastructure is running verify the correct rolebindings are created" classname="Red Hat App Studio E2E tests" status="passed" time="0.013581736"></testcase>
+          <testcase name="[It] [cluster-registration-suite Cluster Registration E2E tests] infrastructure is running verify the correct service account is created" classname="Red Hat App Studio E2E tests" status="passed" time="0.014116205"></testcase>
+          <testcase name="[SynchronizedAfterSuite]" classname="Red Hat App Studio E2E tests" status="passed" time="0.069866493"></testcase>
+      </testsuite>
+  </testsuites>

@@ -38,6 +38,17 @@ paths:
       summary: Quality Repositories
       tags:
       - Github Repository API
+  /api/quality/repositories/get/{gitOrg}/{repo_name}:
+    get:
+      description: return github repository given org and repo name
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Quality Repositories
+      tags:
+      - Github Repository API
   /api/quality/repositories/list:
     get:
       description: returns all repository information founded in server configuration

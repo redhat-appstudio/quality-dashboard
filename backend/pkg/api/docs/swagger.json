@@ -54,6 +54,23 @@
                 }
             }
         },
+        "/api/quality/repositories/get/{gitOrg}/{repo_name}": {
+            "get": {
+                "description": "return github repository given org and repo name",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Github Repository API"
+                ],
+                "summary": "Quality Repositories",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/api/quality/repositories/list": {
             "get": {
                 "description": "returns all repository information founded in server configuration",
