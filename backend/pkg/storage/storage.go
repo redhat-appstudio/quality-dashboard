@@ -2,9 +2,10 @@ package storage
 
 import (
 	"errors"
+	"time"
 
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db"
 	"github.com/google/uuid"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db"
 )
 
 var (
@@ -12,7 +13,7 @@ var (
 	ErrNotFound = errors.New("not found")
 
 	// ErrAlreadyExists is the error returned by storages if a resource ID is taken during a create.
-	ErrAlreadyExists = errors.New("ID already exists")
+	ErrAlreadyExists = errors.New("Already exists")
 )
 
 // Storage is the storage interface used by the server. Implementations are
@@ -22,7 +23,11 @@ type Storage interface {
 	Close() error
 
 	// GET
-	GetRepository(repositoryName string, gitOrganizationName string) (*RepositoryQualityInfo, error)
+	GetRepository(repositoryName string, gitOrganizationName string) (*db.Repository, error)
+	GetLatestProwTestExecution(r *db.Repository, jobType string) (*db.ProwJobs, error)
+	GetSuitesByJobID(jobID string) ([]*db.ProwSuites, error)
+	GetProwJobsResults(*db.Repository) ([]*db.ProwSuites, error)
+	GetProwJobsResultsByJobID(jobID string) ([]*db.ProwJobs, error)
 	ListRepositories() ([]Repository, error)
 	ListWorkflowsByRepository(repositoryName string) (w []GithubWorkflows, err error)
 	ListRepositoriesQualityInfo() ([]RepositoryQualityInfo, error)
@@ -34,6 +39,8 @@ type Storage interface {
 
 	// POST
 	CreateCoverage(p Coverage, repo_id uuid.UUID) error
+	CreateProwJobSuites(prowJobStatus ProwJobSuites, repo_id uuid.UUID) error
+	CreateProwJobResults(prowJobStatus ProwJobStatus, repo_id uuid.UUID) error
 
 	// Delete
 	ReCreateWorkflow(workflow GithubWorkflows, repoName string) error
@@ -51,6 +58,8 @@ type Repository struct {
 	Description string `json:"description"`
 
 	GitURL string `json:"git_url"`
+
+	ID uuid.UUID `json:"id"`
 }
 
 type RepositoryQualityInfo struct {
@@ -77,6 +86,44 @@ type Coverage struct {
 	GitOrganization string `json:"git_organization"`
 
 	CoveragePercentage float64 `json:"coverage_percentage"`
+}
+
+// Repository is an github repository info managed by the storage.
+type ProwJobSuites struct {
+	JobID string `json:"job_id"`
+
+	TestCaseName string `json:"test_name"`
+
+	TestCaseStatus string `json:"test_status"`
+
+	TestTiming float64 `json:"test_timing"`
+
+	JobType string `json:"job_type"`
+}
+
+// Repository is an github repository info managed by the storage.
+type ProwJobStatus struct {
+	JobID string `json:"job_id"`
+
+	CreatedAt time.Time `json:"created_at"`
+
+	State string `json:"state"`
+
+	Duration float64 `json:"duration"`
+
+	TestsCount int64 `json:"tests_count"`
+
+	FailedCount int64 `json:"failed_count"`
+
+	SkippedCount int64 `json:"skipped_count"`
+
+	JobType string `json:"job_type"`
+
+	JobName string `json:"job_name"`
+
+	JobURL string `json:"job_url"`
+
+	CIFailed int16 `json:"ci_failed"`
 }
 
 // Repository is an github repository info managed by the storage.

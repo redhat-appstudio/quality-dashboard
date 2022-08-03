@@ -8,9 +8,11 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/codecov"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/repository"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/workflows"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/codecov"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/prowjobs"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/prowsuites"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/repository"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/workflows"
 )
 
 // ent aliases to avoid import conflicts in user's code.
@@ -32,6 +34,8 @@ type OrderFunc func(*sql.Selector)
 func columnChecker(table string) func(string) error {
 	checks := map[string]func(string) bool{
 		codecov.Table:    codecov.ValidColumn,
+		prowjobs.Table:   prowjobs.ValidColumn,
+		prowsuites.Table: prowsuites.ValidColumn,
 		repository.Table: repository.ValidColumn,
 		workflows.Table:  workflows.ValidColumn,
 	}
@@ -145,7 +149,7 @@ func Sum(field string) AggregateFunc {
 	}
 }
 
-// ValidationError returns when validating a field or edge fails.
+// ValidationError returns when validating a field fails.
 type ValidationError struct {
 	Name string // Field or edge name.
 	err  error

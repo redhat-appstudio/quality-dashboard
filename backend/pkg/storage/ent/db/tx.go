@@ -14,6 +14,10 @@ type Tx struct {
 	config
 	// CodeCov is the client for interacting with the CodeCov builders.
 	CodeCov *CodeCovClient
+	// ProwJobs is the client for interacting with the ProwJobs builders.
+	ProwJobs *ProwJobsClient
+	// ProwSuites is the client for interacting with the ProwSuites builders.
+	ProwSuites *ProwSuitesClient
 	// Repository is the client for interacting with the Repository builders.
 	Repository *RepositoryClient
 	// Workflows is the client for interacting with the Workflows builders.
@@ -154,6 +158,8 @@ func (tx *Tx) Client() *Client {
 
 func (tx *Tx) init() {
 	tx.CodeCov = NewCodeCovClient(tx.config)
+	tx.ProwJobs = NewProwJobsClient(tx.config)
+	tx.ProwSuites = NewProwSuitesClient(tx.config)
 	tx.Repository = NewRepositoryClient(tx.config)
 	tx.Workflows = NewWorkflowsClient(tx.config)
 }

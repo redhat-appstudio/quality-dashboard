@@ -12,11 +12,13 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/codecov"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/predicate"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/repository"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/workflows"
 	"github.com/google/uuid"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/codecov"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/predicate"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/prowjobs"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/prowsuites"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/repository"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/workflows"
 )
 
 // RepositoryQuery is the builder for querying Repository entities.
@@ -29,8 +31,10 @@ type RepositoryQuery struct {
 	fields     []string
 	predicates []predicate.Repository
 	// eager-loading edges.
-	withWorkflows *WorkflowsQuery
-	withCodecov   *CodeCovQuery
+	withWorkflows  *WorkflowsQuery
+	withCodecov    *CodeCovQuery
+	withProwSuites *ProwSuitesQuery
+	withProwJobs   *ProwJobsQuery
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -104,6 +108,50 @@ func (rq *RepositoryQuery) QueryCodecov() *CodeCovQuery {
 			sqlgraph.From(repository.Table, repository.FieldID, selector),
 			sqlgraph.To(codecov.Table, codecov.FieldID),
 			sqlgraph.Edge(sqlgraph.O2M, false, repository.CodecovTable, repository.CodecovColumn),
+		)
+		fromU = sqlgraph.SetNeighbors(rq.driver.Dialect(), step)
+		return fromU, nil
+	}
+	return query
+}
+
+// QueryProwSuites chains the current query on the "prow_suites" edge.
+func (rq *RepositoryQuery) QueryProwSuites() *ProwSuitesQuery {
+	query := &ProwSuitesQuery{config: rq.config}
+	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
+		if err := rq.prepareQuery(ctx); err != nil {
+			return nil, err
+		}
+		selector := rq.sqlQuery(ctx)
+		if err := selector.Err(); err != nil {
+			return nil, err
+		}
+		step := sqlgraph.NewStep(
+			sqlgraph.From(repository.Table, repository.FieldID, selector),
+			sqlgraph.To(prowsuites.Table, prowsuites.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, repository.ProwSuitesTable, repository.ProwSuitesColumn),
+		)
+		fromU = sqlgraph.SetNeighbors(rq.driver.Dialect(), step)
+		return fromU, nil
+	}
+	return query
+}
+
+// QueryProwJobs chains the current query on the "prow_jobs" edge.
+func (rq *RepositoryQuery) QueryProwJobs() *ProwJobsQuery {
+	query := &ProwJobsQuery{config: rq.config}
+	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
+		if err := rq.prepareQuery(ctx); err != nil {
+			return nil, err
+		}
+		selector := rq.sqlQuery(ctx)
+		if err := selector.Err(); err != nil {
+			return nil, err
+		}
+		step := sqlgraph.NewStep(
+			sqlgraph.From(repository.Table, repository.FieldID, selector),
+			sqlgraph.To(prowjobs.Table, prowjobs.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, repository.ProwJobsTable, repository.ProwJobsColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(rq.driver.Dialect(), step)
 		return fromU, nil
@@ -287,13 +335,15 @@ func (rq *RepositoryQuery) Clone() *RepositoryQuery {
 		return nil
 	}
 	return &RepositoryQuery{
-		config:        rq.config,
-		limit:         rq.limit,
-		offset:        rq.offset,
-		order:         append([]OrderFunc{}, rq.order...),
-		predicates:    append([]predicate.Repository{}, rq.predicates...),
-		withWorkflows: rq.withWorkflows.Clone(),
-		withCodecov:   rq.withCodecov.Clone(),
+		config:         rq.config,
+		limit:          rq.limit,
+		offset:         rq.offset,
+		order:          append([]OrderFunc{}, rq.order...),
+		predicates:     append([]predicate.Repository{}, rq.predicates...),
+		withWorkflows:  rq.withWorkflows.Clone(),
+		withCodecov:    rq.withCodecov.Clone(),
+		withProwSuites: rq.withProwSuites.Clone(),
+		withProwJobs:   rq.withProwJobs.Clone(),
 		// clone intermediate query.
 		sql:  rq.sql.Clone(),
 		path: rq.path,
@@ -319,6 +369,28 @@ func (rq *RepositoryQuery) WithCodecov(opts ...func(*CodeCovQuery)) *RepositoryQ
 		opt(query)
 	}
 	rq.withCodecov = query
+	return rq
+}
+
+// WithProwSuites tells the query-builder to eager-load the nodes that are connected to
+// the "prow_suites" edge. The optional arguments are used to configure the query builder of the edge.
+func (rq *RepositoryQuery) WithProwSuites(opts ...func(*ProwSuitesQuery)) *RepositoryQuery {
+	query := &ProwSuitesQuery{config: rq.config}
+	for _, opt := range opts {
+		opt(query)
+	}
+	rq.withProwSuites = query
+	return rq
+}
+
+// WithProwJobs tells the query-builder to eager-load the nodes that are connected to
+// the "prow_jobs" edge. The optional arguments are used to configure the query builder of the edge.
+func (rq *RepositoryQuery) WithProwJobs(opts ...func(*ProwJobsQuery)) *RepositoryQuery {
+	query := &ProwJobsQuery{config: rq.config}
+	for _, opt := range opts {
+		opt(query)
+	}
+	rq.withProwJobs = query
 	return rq
 }
 
@@ -387,9 +459,11 @@ func (rq *RepositoryQuery) sqlAll(ctx context.Context) ([]*Repository, error) {
 	var (
 		nodes       = []*Repository{}
 		_spec       = rq.querySpec()
-		loadedTypes = [2]bool{
+		loadedTypes = [4]bool{
 			rq.withWorkflows != nil,
 			rq.withCodecov != nil,
+			rq.withProwSuites != nil,
+			rq.withProwJobs != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]interface{}, error) {
@@ -470,6 +544,64 @@ func (rq *RepositoryQuery) sqlAll(ctx context.Context) ([]*Repository, error) {
 		}
 	}
 
+	if query := rq.withProwSuites; query != nil {
+		fks := make([]driver.Value, 0, len(nodes))
+		nodeids := make(map[uuid.UUID]*Repository)
+		for i := range nodes {
+			fks = append(fks, nodes[i].ID)
+			nodeids[nodes[i].ID] = nodes[i]
+			nodes[i].Edges.ProwSuites = []*ProwSuites{}
+		}
+		query.withFKs = true
+		query.Where(predicate.ProwSuites(func(s *sql.Selector) {
+			s.Where(sql.InValues(repository.ProwSuitesColumn, fks...))
+		}))
+		neighbors, err := query.All(ctx)
+		if err != nil {
+			return nil, err
+		}
+		for _, n := range neighbors {
+			fk := n.repository_prow_suites
+			if fk == nil {
+				return nil, fmt.Errorf(`foreign-key "repository_prow_suites" is nil for node %v`, n.ID)
+			}
+			node, ok := nodeids[*fk]
+			if !ok {
+				return nil, fmt.Errorf(`unexpected foreign-key "repository_prow_suites" returned %v for node %v`, *fk, n.ID)
+			}
+			node.Edges.ProwSuites = append(node.Edges.ProwSuites, n)
+		}
+	}
+
+	if query := rq.withProwJobs; query != nil {
+		fks := make([]driver.Value, 0, len(nodes))
+		nodeids := make(map[uuid.UUID]*Repository)
+		for i := range nodes {
+			fks = append(fks, nodes[i].ID)
+			nodeids[nodes[i].ID] = nodes[i]
+			nodes[i].Edges.ProwJobs = []*ProwJobs{}
+		}
+		query.withFKs = true
+		query.Where(predicate.ProwJobs(func(s *sql.Selector) {
+			s.Where(sql.InValues(repository.ProwJobsColumn, fks...))
+		}))
+		neighbors, err := query.All(ctx)
+		if err != nil {
+			return nil, err
+		}
+		for _, n := range neighbors {
+			fk := n.repository_prow_jobs
+			if fk == nil {
+				return nil, fmt.Errorf(`foreign-key "repository_prow_jobs" is nil for node %v`, n.ID)
+			}
+			node, ok := nodeids[*fk]
+			if !ok {
+				return nil, fmt.Errorf(`unexpected foreign-key "repository_prow_jobs" returned %v for node %v`, *fk, n.ID)
+			}
+			node.Edges.ProwJobs = append(node.Edges.ProwJobs, n)
+		}
+	}
+
 	return nodes, nil
 }
 
@@ -545,9 +677,6 @@ func (rq *RepositoryQuery) sqlQuery(ctx context.Context) *sql.Selector {
 	if rq.sql != nil {
 		selector = rq.sql
 		selector.Select(selector.Columns(columns...)...)
-	}
-	if rq.unique != nil && *rq.unique {
-		selector.Distinct()
 	}
 	for _, p := range rq.predicates {
 		p(selector)

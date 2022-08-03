@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db"
 )
 
 // The CodeCovFunc type is an adapter to allow the use of ordinary
@@ -18,6 +18,32 @@ func (f CodeCovFunc) Mutate(ctx context.Context, m db.Mutation) (db.Value, error
 	mv, ok := m.(*db.CodeCovMutation)
 	if !ok {
 		return nil, fmt.Errorf("unexpected mutation type %T. expect *db.CodeCovMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The ProwJobsFunc type is an adapter to allow the use of ordinary
+// function as ProwJobs mutator.
+type ProwJobsFunc func(context.Context, *db.ProwJobsMutation) (db.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ProwJobsFunc) Mutate(ctx context.Context, m db.Mutation) (db.Value, error) {
+	mv, ok := m.(*db.ProwJobsMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *db.ProwJobsMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The ProwSuitesFunc type is an adapter to allow the use of ordinary
+// function as ProwSuites mutator.
+type ProwSuitesFunc func(context.Context, *db.ProwSuitesMutation) (db.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ProwSuitesFunc) Mutate(ctx context.Context, m db.Mutation) (db.Value, error) {
+	mv, ok := m.(*db.ProwSuitesMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *db.ProwSuitesMutation", m)
 	}
 	return f(ctx, mv)
 }

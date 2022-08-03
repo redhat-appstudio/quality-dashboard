@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Repositories } from "@app/Repositories/Repositories";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import _ from 'lodash';
 
@@ -18,7 +17,7 @@ const API_URL = (process.env.REACT_APP_API_SERVER_URL || 'http://localhost:9898'
 
 async function getVersion(){
     const result: ApiResponse = { code: 0, data: {} };
-    const subPath ='/api/version';
+    const subPath ='/api/quality/server/info';
     const uri = API_URL + subPath;
     await axios.get(uri).then((res: AxiosResponse) => {
         result.code = res.status;
@@ -50,6 +49,21 @@ async function getRepositories(perPage = 5){
         result.data = err.response.data;
     });
     return result;
+}
+
+async function getAllRepositoriesWithOrgs(){
+    const subPath ='/api/quality/repositories/list';
+    const uri = API_URL + subPath;
+    const response = await fetch(uri)
+    let repoAndOrgs = []
+    if (!response.ok) {
+        throw "Error fetching data from server"
+    }
+    else {
+        const data = await response.json()
+        repoAndOrgs = data.map((row, index) => {return {"repoName": row.repository_name, "organization": row.git_organization }})
+    }
+    return repoAndOrgs
 }
 
 async function getWorkflowByRepositoryName(repositoryName:string){
@@ -109,4 +123,13 @@ async function createRepository(data = {}) {
     return result;
 }
 
-export { getVersion, getRepositories, createRepository, deleteRepositoryAPI, getWorkflowByRepositoryName }
+async function getLatestProwJob(repoName: string, repoOrg:string, jobType:string){
+    const response = await fetch("http://127.0.0.1:9898/api/quality/prow/results/latest/get?repository_name="+repoName+"&git_organization="+repoOrg+"&job_type="+jobType)
+    if(!response.ok){
+        throw "Error fetching data from server. "
+    }
+    const data = await response.json()
+    return data
+}
+
+export { getVersion, getRepositories, createRepository, deleteRepositoryAPI, getWorkflowByRepositoryName, getAllRepositoriesWithOrgs, getLatestProwJob }

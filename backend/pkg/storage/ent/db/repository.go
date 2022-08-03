@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/flacatus/qe-dashboard-backend/pkg/storage/ent/db/repository"
 	"github.com/google/uuid"
+	"github.com/redhat-appstudio/quality-studio/pkg/storage/ent/db/repository"
 )
 
 // Repository is the model entity for the Repository schema.
@@ -35,9 +35,13 @@ type RepositoryEdges struct {
 	Workflows []*Workflows `json:"workflows,omitempty"`
 	// Codecov holds the value of the codecov edge.
 	Codecov []*CodeCov `json:"codecov,omitempty"`
+	// ProwSuites holds the value of the prow_suites edge.
+	ProwSuites []*ProwSuites `json:"prow_suites,omitempty"`
+	// ProwJobs holds the value of the prow_jobs edge.
+	ProwJobs []*ProwJobs `json:"prow_jobs,omitempty"`
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
-	loadedTypes [2]bool
+	loadedTypes [4]bool
 }
 
 // WorkflowsOrErr returns the Workflows value or an error if the edge
@@ -56,6 +60,24 @@ func (e RepositoryEdges) CodecovOrErr() ([]*CodeCov, error) {
 		return e.Codecov, nil
 	}
 	return nil, &NotLoadedError{edge: "codecov"}
+}
+
+// ProwSuitesOrErr returns the ProwSuites value or an error if the edge
+// was not loaded in eager-loading.
+func (e RepositoryEdges) ProwSuitesOrErr() ([]*ProwSuites, error) {
+	if e.loadedTypes[2] {
+		return e.ProwSuites, nil
+	}
+	return nil, &NotLoadedError{edge: "prow_suites"}
+}
+
+// ProwJobsOrErr returns the ProwJobs value or an error if the edge
+// was not loaded in eager-loading.
+func (e RepositoryEdges) ProwJobsOrErr() ([]*ProwJobs, error) {
+	if e.loadedTypes[3] {
+		return e.ProwJobs, nil
+	}
+	return nil, &NotLoadedError{edge: "prow_jobs"}
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -125,6 +147,16 @@ func (r *Repository) QueryWorkflows() *WorkflowsQuery {
 // QueryCodecov queries the "codecov" edge of the Repository entity.
 func (r *Repository) QueryCodecov() *CodeCovQuery {
 	return (&RepositoryClient{config: r.config}).QueryCodecov(r)
+}
+
+// QueryProwSuites queries the "prow_suites" edge of the Repository entity.
+func (r *Repository) QueryProwSuites() *ProwSuitesQuery {
+	return (&RepositoryClient{config: r.config}).QueryProwSuites(r)
+}
+
+// QueryProwJobs queries the "prow_jobs" edge of the Repository entity.
+func (r *Repository) QueryProwJobs() *ProwJobsQuery {
+	return (&RepositoryClient{config: r.config}).QueryProwJobs(r)
 }
 
 // Update returns a builder for updating this Repository.
