@@ -23,6 +23,22 @@ async function getVersion(){
     await axios.get(uri).then((res: AxiosResponse) => {
         result.code = res.status;
         result.data = res.data;
+        console.log(result.data)
+    }).catch((err) => {
+        result.code = err.response.status;
+        result.data = err.response.data;
+    });
+    return result;
+}
+
+async function getJiras(){
+    const result: ApiResponse = { code: 0, data: {} };
+    const subPath ='/api/jira/e2e-known/get';
+    const uri = API_URL + subPath;
+    await axios.get(uri).then((res: AxiosResponse) => {
+        result.code = res.status;
+        result.data = res.data;
+        
     }).catch((err) => {
         result.code = err.response.status;
         result.data = err.response.data;
@@ -109,4 +125,4 @@ async function createRepository(data = {}) {
     return result;
 }
 
-export { getVersion, getRepositories, createRepository, deleteRepositoryAPI, getWorkflowByRepositoryName }
+export { getVersion, getRepositories, createRepository, deleteRepositoryAPI, getWorkflowByRepositoryName, getJiras }
